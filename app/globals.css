@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper-lines: rgba(28, 25, 23, 0.055);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-ink font-sans antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.dark body,
+.dark {
+  color-scheme: dark;
+}
+
+/* Paper rule texture for hero / panels — subtle, notebook-like */
+.paper-grid {
+  background-image:
+    linear-gradient(var(--paper-lines) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-lines) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 40%, transparent 100%);
+}
+
+.dark .paper-grid {
+  --paper-lines: rgba(255, 255, 255, 0.06);
+}
+
+/* Thin scrollbars for chat + code panes */
+.nice-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  @apply bg-stone-300 dark:bg-stone-700 rounded-full;
+}
+.nice-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Code line highlight animation */
+@keyframes tracePulse {
+  0% { background-color: rgba(14, 107, 94, 0.22); }
+  100% { background-color: rgba(14, 107, 94, 0.10); }
+}
+.trace-active {
+  animation: tracePulse 1.2s ease-in-out infinite alternate;
+}
+
+/* Slide-over + modal transitions */
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.slide-in-right {
+  animation: slideInRight 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.35s ease both;
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+.typing-dot {
+  animation: typingDot 1.1s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
